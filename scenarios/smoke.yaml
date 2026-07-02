@@ -1,0 +1,12 @@
+name: smoke check
+baseUrl: http://localhost:4000
+requests:
+  - method: GET
+    path: /health
+stages:
+  - strategy: constant
+    durationSeconds: 5
+    arrivalRate: 10
+thresholds:
+  p95LatencyMs: 200
+  maxErrorRate: 0.01

@@ -1,0 +1,20 @@
+name: ramp to peak
+baseUrl: http://localhost:4000
+requests:
+  - method: GET
+    path: /slow
+stages:
+  - strategy: constant
+    durationSeconds: 5
+    arrivalRate: 5
+  - strategy: ramp
+    durationSeconds: 15
+    arrivalRate: 5
+    targetArrivalRate: 40
+  - strategy: constant
+    durationSeconds: 10
+    arrivalRate: 40
+thresholds:
+  p95LatencyMs: 300
+  p99LatencyMs: 500
+  maxErrorRate: 0.02
